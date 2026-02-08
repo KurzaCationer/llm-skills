@@ -1,40 +1,16 @@
-# Skill Development Guide
+# Skill Development Mandates
 
-This repository uses a structured workflow for creating and maintaining skills.
+STRICT ADHERENCE REQUIRED. NO EXCEPTIONS.
 
-## Structure
+1. **Scaffold**: Use `init_skill.cjs` for all new skills.
+2. **Package**: Every change to `skills/` MUST be immediately followed by packaging into `dist/`.
+3. **Commits**: Follow Conventional Commits strictly (`<type>: <description>`). Description MUST be all lowercase (except brand names).
 
-- `skills/`: Source code and `SKILL.md` for each skill.
-- `dist/`: Packaged `.skill` files tracked in Git for direct consumption.
-
-## Workflow
-
-1.  **Initialize**: Use `init_skill.cjs` to scaffold a new skill in `skills/`.
-2.  **Develop**: Edit `SKILL.md` and add resources to `scripts/`, `references/`, or `assets/`.
-3.  **Package**: Every change to a skill must be followed by re-packaging it into `dist/`.
-4.  **Sync**: Commit and push changes using conventional commits (all lowercase except brand names).
-
-### Commit Format
-
-Use the following format for commit messages:
-`<type>: <description>`
-
-- **type**: feat, fix, docs, refactor, etc.
-- **description**: All lowercase except for brand names (e.g., `feat: add llms-docs-fetcher skill`).
-
-### Packaging Command
-
-If `zip` is not available on your system, use this Python fallback:
-
+### Packaging (Python Fallback)
 ```bash
-python3 -c "import zipfile, os; 
-skill_path = 'skills/<skill-name>'; 
-output_file = 'dist/<skill-name>.skill'; 
-os.makedirs('dist', exist_ok=True);
-with zipfile.ZipFile(output_file, 'w', zipfile.ZIP_DEFLATED) as zipf:
-    for root, dirs, files in os.walk(skill_path):
-        for file in files:
-            file_path = os.path.join(root, file);
-            arcname = os.path.relpath(file_path, skill_path);
-            zipf.write(file_path, arcname)"
+python3 -c "import zipfile, os; s_p='skills/<name>'; o_f='dist/<name>.skill'; os.makedirs('dist', exist_ok=True);
+with zipfile.ZipFile(o_f, 'w', zipfile.ZIP_DEFLATED) as z:
+    for r, d, fs in os.walk(s_p):
+        for f in fs:
+            fp = os.path.join(r, f); z.write(fp, os.path.relpath(fp, s_p))"
 ```
