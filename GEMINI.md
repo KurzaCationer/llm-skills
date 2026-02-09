@@ -4,7 +4,7 @@ STRICT ADHERENCE REQUIRED. NO EXCEPTIONS.
 
 1. **Scaffold**: Use `init_skill.cjs` for all new skills.
 2. **Package**: Every change to `skills/` MUST be immediately followed by packaging into `dist/`.
-3. **Commits**: Follow Conventional Commits strictly (`<type>: <description>`). Description MUST be all lowercase (except brand names).
+3. **Commits**: Follow Conventional Commits strictly (`<type>: <description>`). Description MUST be all lowercase (except brand names). Always push commits.
 
 ### Packaging (Python Fallback)
 ```bash
